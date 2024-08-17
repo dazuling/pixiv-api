@@ -32,12 +32,14 @@ class User:
         name,
         profile_image_urls,
         is_followed=None,
+        is_user_access_blocked=False,
     ):
         self.account = account
         self.id = id
         self.name = name
         self.profile_image_urls = profile_image_urls
         self.is_followed = is_followed
+        self.is_user_access_blocked = is_user_access_blocked
 
     def __repr__(self):
         return f"<User id={self.id} name={self.name}>"
@@ -66,8 +68,9 @@ class Account(User):
         is_premium,
         x_restrict,
         is_mail_authorized,
+        is_user_access_blocked=False,
     ):
-        super().__init__(account, id, name, profile_image_urls)
+        super().__init__(account, id, name, profile_image_urls, is_user_access_blocked=is_user_access_blocked)
         self.mail_address = mail_address
         self.is_premium = is_premium
         self.x_restrict = x_restrict
@@ -165,8 +168,9 @@ class FullUser(User):
         profile=None,
         profile_publicity=None,
         workspace=None,
+        is_user_access_blocked=False
     ):
-        super().__init__(account, id, name, profile_image_urls, is_followed)
+        super().__init__(account, id, name, profile_image_urls, is_followed, is_user_access_blocked=is_user_access_blocked)
         self.comment = comment
         self.profile = profile
         self.profile_publicity = profile_publicity
